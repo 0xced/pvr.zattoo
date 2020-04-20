@@ -46,6 +46,7 @@ void UpdateThread::SetNextRecordingUpdate(time_t nextRecordingsUpdate)
 void UpdateThread::LoadEpg(int uniqueChannelId, time_t startTime,
     time_t endTime)
 {
+  XBMC->Log(LOG_DEBUG, "UpdateThread::LoadEpg(%i, %lu, %lu)", uniqueChannelId, startTime, endTime);
   EpgQueueEntry entry{};
   entry.uniqueChannelId = uniqueChannelId;
   entry.startTime = startTime;

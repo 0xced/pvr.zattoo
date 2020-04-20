@@ -24,6 +24,7 @@ time_t Cache::m_lastCleanup = 0;
 
 bool Cache::Read(const std::string& key, std::string& data)
 {
+  XBMC->Log(LOG_DEBUG, "Cache::Read(%s)", key.c_str());
   std::string cacheFile = CACHE_DIR + key;
   if (!XBMC->FileExists(cacheFile.c_str(), true))
   {
@@ -59,6 +60,7 @@ bool Cache::Read(const std::string& key, std::string& data)
 
 void Cache::Write(const std::string& key, const std::string& data, time_t validUntil)
 {
+  XBMC->Log(LOG_DEBUG, "Cache::Write(%s)", key.c_str());
   if (!XBMC->DirectoryExists(CACHE_DIR))
   {
     if (!XBMC->CreateDirectory(CACHE_DIR))

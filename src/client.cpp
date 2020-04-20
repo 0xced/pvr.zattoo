@@ -416,6 +416,7 @@ PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle,
 
 void setStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, const std::string &name, const std::string &value)
 {
+  XBMC->Log(LOG_DEBUG, "setStreamProperty %s: %s", name.c_str(), value.c_str());
   strncpy(properties[*propertiesCount].strName, name.c_str(), sizeof(properties[*propertiesCount].strName));
   strncpy(properties[*propertiesCount].strValue, value.c_str(), sizeof(properties[*propertiesCount].strValue));  
   *propertiesCount = (*propertiesCount) + 1;

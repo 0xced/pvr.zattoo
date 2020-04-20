@@ -34,6 +34,7 @@ XmlTV::~XmlTV()
 
 bool XmlTV::GetEPGForChannel(const std::string &cid, std::map<std::string, ZatChannel> &channelsByCid)
 {
+  XBMC->Log(LOG_DEBUG, "XmlTV::GetEPGForChannel(%s)", cid.c_str());
   if (!m_xmlFile.empty() && !XBMC->FileExists(m_xmlFile.c_str(), true))
   {
     return false;

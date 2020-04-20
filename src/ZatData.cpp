@@ -32,7 +32,7 @@ P8PLATFORM::CMutex ZatData::sendEpgToKodiMutex;
 std::string ZatData::HttpGetCached(const std::string& url, time_t cacheDuration,
     const std::string& userAgent)
 {
-
+  XBMC->Log(LOG_DEBUG, "ZatData::HttpGetCached(%s, %lu, %s)", url.c_str(), cacheDuration, userAgent.c_str());
   std::string content;
   std::string cacheKey = md5(url);
   if (!Cache::Read(cacheKey, content))
@@ -51,6 +51,7 @@ std::string ZatData::HttpGetCached(const std::string& url, time_t cacheDuration,
 
 std::string ZatData::HttpGet(const std::string& url, bool isInit, const std::string& userAgent)
 {
+  XBMC->Log(LOG_DEBUG, "ZatData::HttpGet(%s, %i, %s)", url.c_str(), isInit, userAgent.c_str());
   return HttpRequest("GET", url, "", isInit, userAgent);
 }
 
@@ -885,6 +886,7 @@ ZatChannel *ZatData::FindChannel(int uniqueId)
 void ZatData::GetEPGForChannelExternalService(int uniqueChannelId,
     time_t iStart, time_t iEnd)
 {
+  XBMC->Log(LOG_DEBUG, "ZatData::GetEPGForChannelExternalService(%i, %lu, %lu)", uniqueChannelId, iStart, iEnd);  
   ZatChannel *zatChannel = FindChannel(uniqueChannelId);
   std::string cid = zatChannel->cid;
   std::ostringstream urlStream;
@@ -971,6 +973,7 @@ void ZatData::GetEPGForChannel(const PVR_CHANNEL &channel, time_t iStart,
 void ZatData::GetEPGForChannelAsync(int uniqueChannelId, time_t iStart,
     time_t iEnd)
 {
+  XBMC->Log(LOG_DEBUG, "ZatData::GetEPGForChannelAsync(%i, %lu, %lu)", uniqueChannelId, iStart, iEnd);
   ZatChannel *zatChannel = FindChannel(uniqueChannelId);
 
   if (m_xmlTV && m_xmlTV->GetEPGForChannel(zatChannel->cid, m_channelsByCid))
@@ -1047,6 +1050,7 @@ void ZatData::GetEPGForChannelAsync(int uniqueChannelId, time_t iStart,
 std::map<time_t, PVRIptvEpgEntry>* ZatData::LoadEPG(time_t iStart, time_t iEnd,
     int uniqueChannelId)
 {
+  XBMC->Log(LOG_DEBUG, "ZatData::LoadEPG(%lu, %lu, %i)", iStart, iEnd, uniqueChannelId);
   //Do some time magic that the start date is not to far in the past because zattoo doesnt like that
   time_t tempStart = iStart - (iStart % (3600 / 2)) - 86400;
   time_t tempEnd = tempStart + 3600 * 5; //Add 5 hours
