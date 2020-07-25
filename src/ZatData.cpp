@@ -843,6 +843,11 @@ std::string ZatData::GetStreamUrl(std::string& jsonString, std::map<std::string,
     break;
   }
   XBMC->Log(LOG_DEBUG, "Got url: %s", url.c_str());
+  if (url.find("http://", 0) != std::string::npos)
+  {
+    url.insert(4, 1, 's');
+    XBMC->Log(LOG_DEBUG, "Transformed url: %s", url.c_str());
+  }
   return url;
 }
 
